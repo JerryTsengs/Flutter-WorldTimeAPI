@@ -20,7 +20,7 @@ void main() {
   runApp( MaterialApp(
 
     // initialRoute: '/home', will make app go to home page first
-    //initialRoute: '/home',
+    // initialRoute: '/home',
     // initialRoute: '/', will make app follow the routes pages
     initialRoute: '/',
     routes: {
