@@ -9,6 +9,7 @@ class WorldTime{
   late String time; // the time in that location, this will be set after getTime() called by others
   late String flag; // url to an asset flag icon
   late String urlString; //location url for api endpoint e.g. Australia/Adelaide
+  bool isDayTime = true; //ture or false if daytime or not
 
   //Create a constructor for the above parameters
   WorldTime({ required this.location, required this.flag, required this.urlString });
@@ -85,6 +86,7 @@ class WorldTime{
 
       //use the import intl.dart libs to reformat time for more human readable e.g. 11:46 AM
       time = DateFormat.jm().format(now);
+      isDayTime = now.hour > 6 && now.hour < 20 ? true : false;
     }
     catch (e) {
       //print error in the Console, try to find error msg start with 'caught error' key word
