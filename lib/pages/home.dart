@@ -22,6 +22,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  //this is ElevatedButton style for below "body: ElevatedButton()"
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.black87,
+    primary: Colors.white,
+    minimumSize: Size(88, 36),
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(2)),
+    ),
+  );
+
+  //check #23 if you don't understand Map usage
   Map data = {};
 
   @override
@@ -33,22 +45,40 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/location');
-              },
-              icon: Icon(Icons.edit_location),
-              label: Text('Edit Location'),
-              /*onPressed: () => {},//{ delete; },
-              icon: Icon(Icons.delete),
-              label: Text('delete quote'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),*/
-
-            ),
-
-          ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
+          child: Column(
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/location');
+                },
+                icon: Icon(Icons.edit_location),
+                label: Text('Edit Location'),
+                style: raisedButtonStyle,
+              ),
+              SizedBox(height: 20.0,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    data['location'],
+                    style: TextStyle(
+                      fontSize: 28.0,
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.0,),
+              Text(
+                data['time'],
+                style: TextStyle(
+                  fontSize: 66.0,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

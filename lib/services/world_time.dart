@@ -1,6 +1,7 @@
 //import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class WorldTime{
 
@@ -47,6 +48,8 @@ class WorldTime{
       // When using await, the async keyword must be declare in this getTime() function
       var url = Uri.parse('http://worldtimeapi.org/api/timezone/$urlString');
       var response = await http.get(url);
+
+      //check #23 if you don't understand Map usage
       Map data = jsonDecode(response.body);
       //print(data); //print data is down below
 
@@ -78,7 +81,10 @@ class WorldTime{
       //print(now); //2022-10-26 20:17:50.294574Z
 
       //change time zone data to String type and set the time property
-      time = now.toString();
+      //time = now.toString();
+
+      //use the import intl.dart libs to reformat time for more human readable e.g. 11:46 AM
+      time = DateFormat.jm().format(now);
     }
     catch (e) {
       //print error in the Console, try to find error msg start with 'caught error' key word
