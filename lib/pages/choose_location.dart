@@ -54,7 +54,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
       ),
       //body:
 /*
-      //this is ElevatedButton example, and it use the style above
+      //this is ElevatedButton example, and it uses the style above
       ElevatedButton(
         style: raisedButtonStyle,
         onPressed: () {
