@@ -45,7 +45,7 @@ class WorldTime{
     //for Error Handling, try to get time back, if not success, go to catch { do something}
     try{
       // When using await, the async keyword must be declare in this getTime() function
-      var url = Uri.parse('http://worldtimeapi.org/api/timezones/$urlString');
+      var url = Uri.parse('http://worldtimeapi.org/api/timezone/$urlString');
       var response = await http.get(url);
       Map data = jsonDecode(response.body);
       //print(data); //print data is down below

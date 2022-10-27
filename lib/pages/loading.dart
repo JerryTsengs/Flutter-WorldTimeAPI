@@ -29,6 +29,8 @@ class _LoadingState extends State<Loading> {
   String time = 'loading';
 
   void setupWorldTime() async {
+
+    //declare a WorldTime class and name it 'instance', assign time zone data to WorldTime constructor
     WorldTime instance = WorldTime(location: 'Adelaide', flag: 'australia.png', urlString: 'Australia/Adelaide');
     //print(instance.location);
     //print(instance.flag);
@@ -38,9 +40,14 @@ class _LoadingState extends State<Loading> {
     // so use await keyword to wait until finish, and we can print data in this instance
     // BTW, when using await, the async keyword must be declare in this setupWorldTime() function
     await instance.getTime();
-    print(instance.time);
-    setState(() {
-      time = instance.time;
+    //print(instance.time);
+
+    //this route Navigator will replace the initState() page underneath
+    //this route also pass three arguments which received for the above instance.getTime() api;
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
     });
   }
 
@@ -67,7 +74,7 @@ class _LoadingState extends State<Loading> {
       body: Padding(
         padding: EdgeInsets.all(50.0),
         child: Text(
-          time, //show this time data on the screen
+          'loading',
         ),
       ),
     );
