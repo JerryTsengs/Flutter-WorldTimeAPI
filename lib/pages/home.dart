@@ -40,7 +40,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    data = ModalRoute.of(context)!.settings.arguments as Map;
+    //when setState() run down below, the data update to new location from dynamic result
+    //so we check this Map data = {}; if Empty than use default data from
+    //WorldTime instance = WorldTime(location: 'Adelaide', flag: 'australia.png', urlString: 'Australia/Adelaide');
+    //in loading.dart file, if not Empty, only update data from dynamic result when choose
+    //the new location
+    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
     print(data);
 
     String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
@@ -62,8 +67,18 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/location');
+                  onPressed: () async {
+                    //Navigator.pop in updateTime() function will return locations data back to "result"
+                    //check choose_location.dart updateTime() function
+                    dynamic result = await Navigator.pushNamed(context, '/location');
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDaytime': result['isDaytime'],
+                        'flag': result['flag']
+                      };
+                    });
                   },
                   icon: Icon(
                       Icons.edit_location,
