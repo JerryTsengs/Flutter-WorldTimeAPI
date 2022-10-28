@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_time/services/world_time.dart';
 
 
 /* This is a Stateful widgets lifecycle example */
@@ -38,6 +39,18 @@ class _ChooseLocationState extends State<ChooseLocation> {
   int counter = 0;
 */
 
+  //List for other countries
+  List<WorldTime> locations = [
+    WorldTime(urlString: 'Europe/London', location: 'London', flag: 'uk.png'),
+    WorldTime(urlString: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+    WorldTime(urlString: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+    WorldTime(urlString: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+    WorldTime(urlString: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
+    WorldTime(urlString: 'America/New_York', location: 'New York', flag: 'usa.png'),
+    WorldTime(urlString: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
+    WorldTime(urlString: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +65,25 @@ class _ChooseLocationState extends State<ChooseLocation> {
         centerTitle: true,
         elevation: 0,
       ),
-      //body:
+      body: ListView.builder(
+        itemCount: locations.length,
+        itemBuilder: (context, index){
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+            child: Card(
+              child: ListTile(
+                onTap: () {
+                  print(locations[index].location);
+                },
+                title: Text(locations[index].location),
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage('assets/${locations[index].flag}'),
+                ),
+              ),
+            ),
+          );
+        }
+      ),
 /*
       //this is ElevatedButton example, and it uses the style above
       ElevatedButton(
@@ -67,7 +98,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
 */
 
 
-    
+
     );
   }
 }
